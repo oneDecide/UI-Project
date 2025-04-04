@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 828656119217907019}
   - component: {fileID: 8808450758712205796}
   - component: {fileID: 5356514291303729378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LavaSlimeBaby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2941256815872126898, guid: 03188ec87795d5d42b9c63374e2ffe02, type: 3}
+  m_Sprite: {fileID: 1349878323109093402, guid: e5c63031db2796a44a2519381f79304c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 4.7272725}
+  m_Size: {x: 1, y: 0.59090906}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 0716477ff69754c449b8af4baed446a8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -133,7 +133,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -155,13 +155,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 4.7272725}
-    newSize: {x: 8, y: 4.7272725}
+    oldSize: {x: 1, y: 0.59090906}
+    newSize: {x: 1, y: 0.59090906}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 8, y: 4.7272725}
+  m_Size: {x: 1, y: 0.6}
   m_EdgeRadius: 0
 --- !u!114 &5356514291303729378
 MonoBehaviour:
@@ -178,10 +178,6 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   player: {fileID: 0}
-  boxSize: {x: 0.69, y: 0.18}
-  castDistance: 0.21
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   bounceForce: 5
+  bounceRate: 1
   bounce: 0

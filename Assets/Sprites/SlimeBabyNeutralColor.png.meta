@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aa8328225c45f3e48af82a0419b1a768
+guid: a9da2435c0a65ae4aa84cebe77d1860c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 360858184865054817
-    second: lavaDaddy-Big_0
+      213: -5146806013216064888
+    second: SlimeBabyNeutralColor_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 29
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lavaDaddy-Big_0
+      name: SlimeBabyNeutralColor_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 0
-        width: 218
-        height: 248
+        width: 176
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1608c237b96020500800000000000000
-      internalID: 360858184865054817
+      spriteID: 88a796e233fd298b0800000000000000
+      internalID: -5146806013216064888
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      lavaDaddy-Big_0: 360858184865054817
+      SlimeBabyNeutralColor_0: -5146806013216064888
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
