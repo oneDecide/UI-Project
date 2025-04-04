@@ -36,10 +36,10 @@ public class babySlime : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // if (player == null)
-        // {
-        //     player = GameObject.FindGameObjectWithTag("Player");
-        // }
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
 
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("Bounce", 0, bounceRate);
