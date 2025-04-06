@@ -33,7 +33,7 @@ public class babySlime : MonoBehaviour
         healthScript = GetComponent<EntityHealth>();
         if (healthScript == null)
         {
-            Debug.LogError("EntityHealth component not found on this GameObject.");
+            //debug.logError("EntityHealth component not found on this GameObject.");
         }
     }
 
@@ -42,10 +42,8 @@ public class babySlime : MonoBehaviour
     void Update()
     {
 
-        if(healthScript.getHP() <= 0){
-            Destroy(gameObject);
-        }
-        print("i did it");
+        
+        
         // Flip sprite based on movement direction
         if (rb.linearVelocity.x > 0)
         {
@@ -71,7 +69,7 @@ public class babySlime : MonoBehaviour
 
         Vector2 direction = (player.transform.position - transform.position).normalized;
         rb.AddForce(direction * bounceForce * random, ForceMode2D.Impulse);
-        Debug.Log("Slime is bouncing towards the player every 3 seconds.");
+        //debug.log("Slime is bouncing towards the player every 3 seconds.");
         bounce++;
         //take tamage per bounce
         if (bounce >= 3){
@@ -85,9 +83,12 @@ public class babySlime : MonoBehaviour
         
     }
 
-    void takeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
+    void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
         healthScript.takeDamage(amount);
         rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
-        Debug.Log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
+        //debug.log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
+        if(healthScript.getHP() <= 0){
+            Destroy(gameObject);
+        }
     }
 }

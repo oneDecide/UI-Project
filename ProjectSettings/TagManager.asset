@@ -49,11 +49,17 @@ TagManager:
   - name: AboveTilemap
     uniqueID: 3683637703
     locked: 0
-  - name: Players/Enemies
+  - name: Enemies
     uniqueID: 3301954157
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Players
+    uniqueID: 428860885
+    locked: 0
+  - name: UI
+    uniqueID: 297220107
     locked: 0
   m_RenderingLayers:
   - Default
