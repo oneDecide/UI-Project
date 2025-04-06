@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 428860885
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1019496163925560433, guid: c18c4c629f55e5547975d7f315d23487, type: 3}
+  m_Sprite: {fileID: -9134420595179370597, guid: a1a495fdb231fdb48a69a22664ae62f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 6270540922576117387}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 3347400060748757550, guid: c18c4c629f55e5547975d7f315d23487, type: 3}
+  m_Controller: {fileID: 7214196057687398695, guid: a1a495fdb231fdb48a69a22664ae62f5, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -187,12 +187,12 @@ SpriteRenderer:
   m_SortingLayerID: 428860885
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1019496163925560433, guid: c18c4c629f55e5547975d7f315d23487, type: 3}
+  m_Sprite: {fileID: -9134420595179370597, guid: a1a495fdb231fdb48a69a22664ae62f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.05, y: 0.16}
+  m_Size: {x: 0.15625, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -208,7 +208,7 @@ Animator:
   m_GameObject: {fileID: 8122223481395308194}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 3347400060748757550, guid: c18c4c629f55e5547975d7f315d23487, type: 3}
+  m_Controller: {fileID: 7214196057687398695, guid: a1a495fdb231fdb48a69a22664ae62f5, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -366,12 +366,19 @@ MonoBehaviour:
   leftSword: {fileID: 8122223481395308194}
   rightSword: {fileID: 6270540922576117387}
   animator: {fileID: 0}
+  anim: {fileID: 0}
   leftSwordAnimator: {fileID: 0}
   rightSwordAnimator: {fileID: 0}
   speed: 5
   currentInputMovmentDir: {x: 0, y: 0}
   defaultAttackTimer: 0
-  defaultAttackInterval: 0.8
+  attackAnimationLength: 0.8
+  DA_BoxSize_Left: {x: 1.4, y: 2.1}
+  DA_CastDistance_Left: 1.4
+  DA_BoxSize_Right: {x: 1.4, y: 2.1}
+  DA_CastDistance_Right: -1.4
+  DA_CastDistance_Vertical: -0.55
+  hasDefaultAttacked: 0
 --- !u!114 &1115076954767151354
 MonoBehaviour:
   m_ObjectHideFlags: 0

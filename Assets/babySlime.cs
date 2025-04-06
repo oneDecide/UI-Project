@@ -83,7 +83,7 @@ public class babySlime : MonoBehaviour
         
     }
 
-    void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
+    public void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
         healthScript.takeDamage(amount);
         rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
         //debug.log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
