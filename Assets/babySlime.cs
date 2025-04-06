@@ -2,37 +2,22 @@ using UnityEngine;
 
 public class babySlime : MonoBehaviour
 {
-    [Header("Health Attributes")]
-    [SerializeField] private int health = 100;
-    [SerializeField] private int maxHealth = 100;
+    //[Header("Health Attributes")]
 
+    // script component for health attributes
+    private EntityHealth healthScript; 
     [SerializeField] public GameObject player;
 
         // boxcast attributes for grounded check
     private Rigidbody2D rb;
-    private float speed = 9f;
+    // private float speed = 9f;
 
     public int bounceForce = 5;
 
     public float bounceRate = 1f;
 
     public int bounce = 0;
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health < 0)
-        {
-            health = 0;
-        }
-    }
-    public void Heal(int amount)
-    {
-        health += amount;
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-    }
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,7 +29,12 @@ public class babySlime : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("Bounce", 0, bounceRate);
         
-        
+        // Get the EntityHealth component from the GameObject
+        healthScript = GetComponent<EntityHealth>();
+        if (healthScript == null)
+        {
+            Debug.LogError("EntityHealth component not found on this GameObject.");
+        }
     }
 
 
@@ -52,7 +42,9 @@ public class babySlime : MonoBehaviour
     void Update()
     {
 
-
+        if(healthScript.getHP() <= 0){
+            Destroy(gameObject);
+        }
         print("i did it");
         // Flip sprite based on movement direction
         if (rb.linearVelocity.x > 0)
@@ -72,13 +64,30 @@ public class babySlime : MonoBehaviour
 
     private void Bounce(){
         // move toward player
+
+        // get random number between .5 and 1.5
+        float random = Random.Range(.3f, 1.7f);
+
+
         Vector2 direction = (player.transform.position - transform.position).normalized;
-        rb.AddForce(direction * speed, ForceMode2D.Impulse);
+        rb.AddForce(direction * bounceForce * random, ForceMode2D.Impulse);
         Debug.Log("Slime is bouncing towards the player every 3 seconds.");
         bounce++;
+        //take tamage per bounce
+        if (bounce >= 3){
+            
+            bounce = 0;
+        }
+        // healthScript.takeDamage(1);
     }
 
     void OnDrawGizmos(){
         
+    }
+
+    void takeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
+        healthScript.takeDamage(amount);
+        rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
+        Debug.Log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
     }
 }
