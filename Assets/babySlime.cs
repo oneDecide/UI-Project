@@ -17,6 +17,8 @@ public class babySlime : MonoBehaviour
     public float bounceRate = 1f;
 
     public int bounce = 0;
+
+    [SerializeField] public GameObject gem = null;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -88,6 +90,10 @@ public class babySlime : MonoBehaviour
         rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
         //debug.log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
         if(healthScript.getHP() <= 0){
+            // spawn gem
+            if (gem != null){
+                Instantiate(gem, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }
