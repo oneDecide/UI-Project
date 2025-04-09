@@ -1,47 +1,81 @@
 using UnityEngine;
 
-public class DefaultCharacter : CharacterBlueprint
+[RequireComponent(typeof(Rigidbody2D))]
+public class DefaultCharacter : MonoBehaviour
 {
-    [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private PersonalHealthBar healthBar;
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float deceleration = 15f;
     
-    private int currentHealth;
+    private Rigidbody2D rb;
+    private Vector2 movementInput;
+    private Vector2 currentVelocity;
+    private bool canMove = true;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-        currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
+        ConfigureRigidbody();
     }
 
-    public void TakeDamage(int damage)
+    private void ConfigureRigidbody()
     {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        
-        if(currentHealth <= 0)
+        rb.gravityScale = 0;
+        rb.linearDamping = 5;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    private void Update()
+    {
+        if(canMove)
         {
-            Die();
+            HandleInput();
         }
     }
 
-    public void Heal(int amount)
+    private void HandleInput()
     {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-    }
-
-
-    private void Die()
-    {
-        // Add death effects/animation
-        Debug.Log("Player Died");
-        gameObject.SetActive(false);
+        // Get raw input for instant response
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         
-        // Trigger game over or respawn logic
+        // Normalize diagonal movement
+        movementInput = new Vector2(horizontal, vertical).normalized;
     }
 
-    protected override void Update()
+    private void FixedUpdate()
     {
-        base.Update();
+        if(canMove)
+        {
+            HandleMovementPhysics();
+        }
     }
 
+    private void HandleMovementPhysics()
+    {
+        Vector2 targetVelocity = movementInput * moveSpeed;
+        Vector2 velocityDifference = targetVelocity - rb.linearVelocity;
+        
+        // Apply acceleration force
+        Vector2 force = velocityDifference * acceleration;
+        rb.AddForce(force, ForceMode2D.Force);
+        
+        // Manual deceleration when no input
+        if(movementInput == Vector2.zero)
+        {
+            rb.linearVelocity = Vector2.MoveTowards(
+                rb.linearVelocity, 
+                Vector2.zero, 
+                deceleration * Time.fixedDeltaTime
+            );
+        }
+    }
+
+    public void SetMovementEnabled(bool state)
+    {
+        canMove = state;
+        if(!state) rb.linearVelocity = Vector2.zero;
+    }
 }
