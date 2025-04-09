@@ -47,6 +47,8 @@ public class characterController : MonoBehaviour
 
     public bool hasDefaultAttacked = false;
 
+    [SerializeField] public GameObject GameoverCanvas = null;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -110,6 +112,10 @@ public class characterController : MonoBehaviour
         healthScript.takeDamage(damage);
         if (healthScript.getHP() <= 0)
         {
+            
+            //gameover
+            GameoverCanvas.SetActive(true);
+
             Destroy(gameObject);
         }
     }

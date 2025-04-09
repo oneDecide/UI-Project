@@ -19,7 +19,16 @@ public class babySlime : MonoBehaviour
     public int bounce = 0;
 
     [SerializeField] public GameObject gem = null;
-    
+
+    public bool hasAttacked = false;
+
+    [SerializeField] public int slimeDamage = 10;
+
+    [Header("Slime Hitbox Stuff")]
+
+    [SerializeField] public Vector2 hitboxSize = new Vector2(1f, 1f);
+    [SerializeField] public float hitboxDistanceHorizontal = 0f;
+    [SerializeField] public float hitboxDistanceVertical = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,6 +64,12 @@ public class babySlime : MonoBehaviour
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
+
+        if(hasAttacked == false){
+            doAttacks();
+        }
+
+
     }
 
     public void FixedUpdate(){
@@ -78,11 +93,14 @@ public class babySlime : MonoBehaviour
             
             bounce = 0;
         }
+
+        hasAttacked = false;
         // healthScript.takeDamage(1);
     }
 
     void OnDrawGizmos(){
-        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + new Vector3(hitboxDistanceHorizontal, hitboxDistanceVertical), hitboxSize);
     }
 
     public void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
@@ -95,6 +113,19 @@ public class babySlime : MonoBehaviour
                 Instantiate(gem, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
+        }
+    }
+
+    public void doAttacks(){
+        //raycast to check if there is an enemy in front of the sword
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position + new Vector3(hitboxDistanceHorizontal, hitboxDistanceVertical), hitboxSize, 0f, Vector2.zero, 0f, LayerMask.GetMask("PlayerHitbox"));
+        foreach (RaycastHit2D hit in hits){
+            if(hit.collider.gameObject.transform.parent != this.gameObject && hit.collider.gameObject.transform.parent.GetComponent<characterController>())
+            {
+                characterController player = hit.collider.gameObject.transform.parent.GetComponent<characterController>();
+                player.TakeDamage(slimeDamage);
+                hasAttacked = true;
+            }
         }
     }
 }
