@@ -1,55 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class EntityHealth : MonoBehaviour
 {
-
-    [Header("Entity Script Values")]
-    [SerializeField] protected float maxHealth = 100; // Maximum health value
-    [SerializeField] public float currentHealth = 100;   // Current health value
+    [Header("Entity Health Settings")]
+    [SerializeField] protected float maxHealth = 100;
+    [SerializeField] public float currentHealth = 100;
+    [SerializeField] public GameObject gemPrefab; // Changed variable name for clarity
+    [SerializeField] [Range(0, 1)] float gemDropChance = 1f; // Optional drop chance
 
     void Start()
     {
-        
+        currentHealth = maxHealth; // Initialize health at start
     }
 
-    // Method to take damage
-     public void takeDamage(float amount)
+    public void RecieveDamage(float amount)
     {
-        currentHealth -= amount; // Subtract damage from current health
-        if (currentHealth < 0)
+        currentHealth -= amount;
+        Debug.Log("Enemy recieved damage");
+        if (currentHealth <= 0)
         {
-            currentHealth = 0; // Prevent negative health
+            Die();
         }
-
-        //Debug.Log($"Took damage: {amount}. Current health: {currentHealth}");
-        
     }
 
-    public float getHP(){
-        return currentHealth;
+    private void Die()
+    {
+        TrySpawnGem();
+        Destroy(gameObject);
     }
 
-    public float getMaxHP(){
-        return maxHealth;
+    private void TrySpawnGem()
+    {
+        if (gemPrefab != null && Random.value <= gemDropChance)
+        {
+            Instantiate(gemPrefab, transform.position, Quaternion.identity);
+        }
     }
 
-    // Method to heal
     public void Heal(float amount)
     {
-        currentHealth += amount; // Add healing amount to current health
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth; // Prevent exceeding max health
-        }
-
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log($"Healed: {amount}. Current health: {currentHealth}");
     }
 
-    // Method to get current health
-    
-    
+    public float GetHP() => currentHealth;
+    public float GetMaxHP() => maxHealth;
 }

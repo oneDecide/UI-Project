@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class AssaultRifle : MonoBehaviour
 {
@@ -37,7 +38,8 @@ public class AssaultRifle : MonoBehaviour
     [SerializeField] private float rotationalRecoilAngle = 3f;
     [SerializeField] private float recoilRecoverySpeed = 8f;
     [SerializeField] private Vector2 recoilRandomRange = new Vector2(-15f, 15f);
-
+    [SerializeField] private TMP_Text ammoText;
+    [SerializeField] private TMP_Text ammoWarnText;
     private const int MAX_MODS = 4;
     private List<WeaponMod> activeMods = new List<WeaponMod>();
     private ObjectPool<Projectile> projectilePool;
@@ -55,6 +57,7 @@ public class AssaultRifle : MonoBehaviour
 
     private void Awake()
     {
+        ammoWarnText.enabled = false;
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -105,6 +108,7 @@ public class AssaultRifle : MonoBehaviour
         HandleInput();
         HandleRecoil();
         UpdateSpriteFlip();
+        UpdateAmmoUI();
     }
 
     private void CalculateTargetPosition()
@@ -239,17 +243,21 @@ public class AssaultRifle : MonoBehaviour
         );
     }
 
-    private IEnumerator Reload()
-    {
-        isReloading = true;
-        audioSource.PlayOneShot(reloadSound, volume);
-        
-        yield return new WaitForSeconds(reloadTime);
-        
-        currentAmmo = magazineCapacity;
-        isReloading = false;
-    }
+public float ReloadTime { get; private set; }
+public float ReloadStartTime { get; private set; }
 
+private IEnumerator Reload()
+{
+    isReloading = true;
+    ReloadStartTime = Time.time;
+    ReloadTime = reloadTime;
+    
+    audioSource.PlayOneShot(reloadSound, volume);
+    yield return new WaitForSeconds(reloadTime);
+    
+    currentAmmo = magazineCapacity;
+    isReloading = false;
+}
     public bool TryAddMod(WeaponMod mod)
     {
         if (activeMods.Count >= MAX_MODS || activeMods.Contains(mod))
@@ -288,6 +296,27 @@ public class AssaultRifle : MonoBehaviour
         foreach (var mod in activeMods)
         {
             mod.ApplyMod(this);
+        }
+    }
+
+     private void UpdateAmmoUI()
+    {
+        if(currentAmmo < magazineCapacity*.2){
+            ammoWarnText.enabled = true;
+        }
+        else{
+            ammoWarnText.enabled = false;
+        }
+        if (IsReloading)
+        {
+            // Calculate remaining reload time
+            float reloadProgress = ReloadTime - (Time.time - ReloadStartTime);
+            ammoText.text = "Ammo: Reloading: " + reloadProgress.ToString("F1");
+        }
+        else
+        {
+            // Show ammo count
+            ammoText.text = $"Ammo: {CurrentAmmo} / {MagazineSize}";
         }
     }
 

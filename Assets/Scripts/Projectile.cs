@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed = 25f;
     [SerializeField] private float lifetime = 3f;
 
+
     public TrailRenderer Trail => trailRenderer;
 
     public void Initialize(float damage, int maxPenetrations, bool isCritical, 
@@ -45,19 +46,25 @@ public class Projectile : MonoBehaviour
         Invoke(nameof(ReleaseProjectile), lifetime);
     }
 
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.CompareTag("Player") || other.isTrigger) return;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") || other.isTrigger) return;
 
-    //     if (other.TryGetComponent<IDamageable>(out var damageable))
-    //     {
-    //         float finalDamage = isCritical ? damage * critMultiplier : damage;
-    //         damageable.TakeDamage(finalDamage, isCritical);
-    //     }
+        if (other.CompareTag("Enemy"))
+        {
+            
+            babySlime babySlime = other.GetComponent<babySlime>();
+            Debug.Log("HIT ");
+            float finalDamage = isCritical ? damage * critMultiplier : damage;
+            Vector2 knockbackDir = new Vector2(0, 0); // Knockback direction (diagonal)
+            float knockbackStrength = 10.0f;
+            babySlime.TakeDamage(finalDamage, knockbackDir, knockbackStrength);
+            ReleaseProjectile();
+        }
 
-    //     remainingPenetrations--;
-    //     if (remainingPenetrations <= 0) ReleaseProjectile();
-    // }
+        remainingPenetrations--;
+        if (remainingPenetrations <= 0) ReleaseProjectile();
+    }
 
     private void ReleaseProjectile()
     {
@@ -73,10 +80,16 @@ public class Projectile : MonoBehaviour
         if (pool != null)
         {
             pool.Release(this);
+            
         }
         else
         {
+            Debug.Log("TF");
             Destroy(gameObject);
         }
+    }
+
+    public void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
+        Debug.Log("");
     }
 }
