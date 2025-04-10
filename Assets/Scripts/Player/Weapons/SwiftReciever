@@ -1,0 +1,18 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "WeaponMods/SwiftReceiver")]
+public class SwiftReceiverMod : WeaponMod
+{
+    [SerializeField, Range(1.1f, 1.5f)] 
+    private float fireRateMultiplier = 1.4f;
+    
+    public override void ApplyMod(AssaultRifle weapon)
+    {
+        weapon.fireRate *= fireRateMultiplier;
+    }
+    
+    public override void RemoveMod(AssaultRifle weapon)
+    {
+        weapon.fireRate /= fireRateMultiplier;
+    }
+}

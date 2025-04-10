@@ -1,0 +1,18 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "WeaponMods/SplitChamber")]
+public class SplitChamberMod : WeaponMod
+{
+    [SerializeField, Range(0.5f, 1.5f)] 
+    private float multishotBonus = 0.9f;
+    
+    public override void ApplyMod(AssaultRifle weapon)
+    {
+        weapon.multishot += multishotBonus;
+    }
+    
+    public override void RemoveMod(AssaultRifle weapon)
+    {
+        weapon.multishot -= multishotBonus;
+    }
+}

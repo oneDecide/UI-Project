@@ -1,0 +1,23 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "WeaponMods/TankMuzzle")]
+public class TankMuzzleMod : WeaponMod
+{
+    [SerializeField, Range(1.1f, 1.5f)] 
+    private float damageMultiplier = 1.4f;
+    
+    [SerializeField, Range(0.5f, 0.9f)] 
+    private float fireRatePenalty = 0.9f;
+    
+    public override void ApplyMod(AssaultRifle weapon)
+    {
+        weapon.damage = Mathf.RoundToInt(weapon.damage * damageMultiplier);
+        weapon.fireRate *= fireRatePenalty;
+    }
+    
+    public override void RemoveMod(AssaultRifle weapon)
+    {
+        weapon.damage = Mathf.RoundToInt(weapon.damage / damageMultiplier);
+        weapon.fireRate /= fireRatePenalty;
+    }
+}

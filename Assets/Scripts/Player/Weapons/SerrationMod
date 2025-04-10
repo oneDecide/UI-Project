@@ -1,0 +1,18 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "WeaponMods/Serration")]
+public class SerrationMod : WeaponMod
+{
+    [SerializeField, Range(1f, 2f)] 
+    private float damageMultiplier = 1.25f;
+    
+    public override void ApplyMod(AssaultRifle weapon)
+    {
+        weapon.damage = Mathf.RoundToInt(weapon.damage * damageMultiplier);
+    }
+    
+    public override void RemoveMod(AssaultRifle weapon)
+    {
+        weapon.damage = Mathf.RoundToInt(weapon.damage / damageMultiplier);
+    }
+}

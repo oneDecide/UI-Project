@@ -1,0 +1,13 @@
+[CreateAssetMenu(menuName = "WeaponMods/InstantAimMod")]
+public class InstantAimMod : WeaponMod
+{
+    public override void ApplyMod(AssaultRifle weapon)
+    {
+        weapon.instantAim = true;
+    }
+
+    public override void RemoveMod(AssaultRifle weapon)
+    {
+        weapon.instantAim = false;
+    }
+}

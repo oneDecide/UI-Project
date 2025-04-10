@@ -3,84 +3,80 @@ using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private TrailRenderer trail;
-    [SerializeField] private ParticleSystem impactVfx;
-    [SerializeField] private GameObject critImpactVfx;
-    [SerializeField] private AudioClip impactSound;
-    [Range(0, 1)] [SerializeField] private float impactVolume = 0.8f;
+    [Header("Components")]
+    [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Collider2D col;
 
-    [Header("Movement")]
-    [SerializeField] private float speed = 25f;
-    [SerializeField] private float maxLifetime = 3f;
-
-    private IObjectPool<Projectile> pool;
-    private Rigidbody2D rb;
-    private Collider2D col;
-    
-    // Runtime stats
+    [Header("Stats")]
     private float damage;
     private int remainingPenetrations;
     private bool isCritical;
     private float critMultiplier;
     private Vector2 firePosition;
+    private IObjectPool<Projectile> pool;
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
-    }
+    [Header("Settings")]
+    [SerializeField] private float speed = 25f;
+    [SerializeField] private float lifetime = 3f;
 
-    public void Initialize(float damage, int maxPenetrations, bool isCritical, float critMultiplier, Vector2 firePos, IObjectPool<Projectile> projectilePool)
+    public TrailRenderer Trail => trailRenderer;
+
+    public void Initialize(float damage, int maxPenetrations, bool isCritical, 
+                         float critMultiplier, Vector2 firePos, IObjectPool<Projectile> pool)
     {
         this.damage = damage;
         this.remainingPenetrations = maxPenetrations;
         this.isCritical = isCritical;
         this.critMultiplier = critMultiplier;
         this.firePosition = firePos;
-        this.pool = projectilePool;
+        this.pool = pool;
 
         col.enabled = true;
         rb.linearVelocity = transform.right * speed;
         
-        if(trail != null)
+        if (trailRenderer != null)
         {
-            trail.Clear();
-            trail.emitting = true;
+            trailRenderer.Clear();
+            trailRenderer.emitting = true;
         }
 
         CancelInvoke();
-        Invoke(nameof(ReleaseProjectile), maxLifetime);
+        Invoke(nameof(ReleaseProjectile), lifetime);
     }
 
     // private void OnTriggerEnter2D(Collider2D other)
     // {
-    //     if(other.CompareTag("Player") || other.isTrigger) return;
+    //     if (other.CompareTag("Player") || other.isTrigger) return;
 
-    //     if(other.TryGetComponent<IDamageable>(out var damageable))
+    //     if (other.TryGetComponent<IDamageable>(out var damageable))
     //     {
     //         float finalDamage = isCritical ? damage * critMultiplier : damage;
     //         damageable.TakeDamage(finalDamage, isCritical);
     //     }
 
-    //     PlayImpactEffects(other.transform.position);
     //     remainingPenetrations--;
-
-    //     if(remainingPenetrations <= 0) ReleaseProjectile();
+    //     if (remainingPenetrations <= 0) ReleaseProjectile();
     // }
-
-    private void PlayImpactEffects(Vector3 position)
-    {
-        if(impactVfx != null) Instantiate(impactVfx, position, Quaternion.identity).Play();
-        if(isCritical && critImpactVfx != null) Instantiate(critImpactVfx, position, Quaternion.identity);
-        if(impactSound != null) AudioSource.PlayClipAtPoint(impactSound, position, impactVolume);
-    }
 
     private void ReleaseProjectile()
     {
-        if(trail != null) trail.emitting = false;
+        if (trailRenderer != null)
+        {
+            trailRenderer.emitting = false;
+            trailRenderer.Clear();
+        }
+
         col.enabled = false;
         rb.linearVelocity = Vector2.zero;
-        pool?.Release(this);
+        
+        if (pool != null)
+        {
+            pool.Release(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
