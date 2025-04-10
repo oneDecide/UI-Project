@@ -12,13 +12,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: gem
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: bf0ae3c7d05a5444badd94cb1c75bba6, type: 3}
+      propertyPath: m_TagString
+      value: Gem
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: bf0ae3c7d05a5444badd94cb1c75bba6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.814
+      value: 1.3059075
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: bf0ae3c7d05a5444badd94cb1c75bba6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.692
+      value: 1.1841521
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: bf0ae3c7d05a5444badd94cb1c75bba6, type: 3}
       propertyPath: m_LocalPosition.z

@@ -104,11 +104,12 @@ public class babySlime : MonoBehaviour
     }
 
     public void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
-        healthScript.takeDamage(amount);
+        healthScript.RecieveDamage(amount);
         rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
         //debug.log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
-        if(healthScript.getHP() <= 0){
+        if(healthScript.GetHP() <= 0){
             // spawn gem
+            Debug.Log("Enemy Death");
             if (gem != null){
                 Instantiate(gem, transform.position, Quaternion.identity);
             }
