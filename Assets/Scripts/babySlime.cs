@@ -81,7 +81,7 @@ public class babySlime : MonoBehaviour
         // move toward player
 
         // get random number between .5 and 1.5
-        float random = Random.Range(.3f, 1.7f);
+        float random = Random.Range(.7f, 1.7f);
 
 
         Vector2 direction = (player.transform.position - transform.position).normalized;
@@ -104,12 +104,11 @@ public class babySlime : MonoBehaviour
     }
 
     public void TakeDamage(float amount, Vector2 knockbackDirection, float knockbackForce){
-        healthScript.RecieveDamage(amount);
+        healthScript.takeDamage(amount);
         rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode2D.Impulse);
         //debug.log("Took damage: " + amount + ". Current health: " + healthScript.getHP());
-        if(healthScript.GetHP() <= 0){
+        if(healthScript.getHP() <= 0){
             // spawn gem
-            Debug.Log("Enemy Death");
             if (gem != null){
                 Instantiate(gem, transform.position, Quaternion.identity);
             }
@@ -118,13 +117,22 @@ public class babySlime : MonoBehaviour
     }
 
     public void doAttacks(){
-        //raycast to check if there is an enemy in front of the sword
+
+        Debug.Log("In attack method");
         RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position + new Vector3(hitboxDistanceHorizontal, hitboxDistanceVertical), hitboxSize, 0f, Vector2.zero, 0f, LayerMask.GetMask("PlayerHitbox"));
         foreach (RaycastHit2D hit in hits){
             if(hit.collider.gameObject.transform.parent != this.gameObject && hit.collider.gameObject.transform.parent.GetComponent<characterController>())
             {
+                Debug.Log("HIT PLAYER");
                 characterController player = hit.collider.gameObject.transform.parent.GetComponent<characterController>();
                 player.TakeDamage(slimeDamage);
+                hasAttacked = true;
+            }
+            if(hit.collider.gameObject.transform.parent != this.gameObject && hit.collider.gameObject.transform.parent.GetComponent<DefaultCharacter>())
+            {
+                Debug.Log("HIT PLAYER");
+                DefaultCharacter playerDC = hit.collider.gameObject.transform.parent.GetComponent<DefaultCharacter>();
+                playerDC.TakeDamage(slimeDamage);
                 hasAttacked = true;
             }
         }

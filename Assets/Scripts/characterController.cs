@@ -109,8 +109,8 @@ public class characterController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        healthScript.RecieveDamage(damage);
-        if (healthScript.GetHP() <= 0)
+        healthScript.takeDamage(damage);
+        if (healthScript.getHP() <= 0)
         {
             
             //gameover

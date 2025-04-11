@@ -185,12 +185,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4225491547907055312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a08b1682a476b41a95f1c8053ef229, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bb425beed36693449862efd3a707aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
   MaxHealth: 0
   Width: 0
   player: {fileID: 0}
-  healthBottom: {fileID: 3571178398647013265}
-  healthTop: {fileID: 4225491547907055312}
+  healthBottom: {fileID: 0}
+  healthTop: {fileID: 0}

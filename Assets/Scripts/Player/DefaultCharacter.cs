@@ -26,6 +26,25 @@ public class DefaultCharacter : MonoBehaviour
     private bool canMove = true;
     private int currentHealth;
 
+    private EntityHealth healthScript;
+    [SerializeField] private GameObject GameoverCanvas = null;
+
+    /**
+     * Start method that does:
+     * 1. Get the EntityHealth component from the GameObject.
+     * 2. Check if the component is null and log an error if it is.
+     * @author Anthony
+    */
+    private void Start()
+    {
+        healthScript = GetComponent<EntityHealth>();
+        if (healthScript == null)
+        {
+            Debug.LogError("EntityHealth component not found on this GameObject.");
+        }
+        
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -88,10 +107,10 @@ public class DefaultCharacter : MonoBehaviour
 
     private void HandleEnemyCollision()
     {
-        currentHealth -= enemyCollisionDamage;
-        Debug.Log($"Health: {currentHealth}/{maxHealth}");
+        // currentHealth -= enemyCollisionDamage;
+        // Debug.Log($"Health: {currentHealth}/{maxHealth}");
 
-        if (currentHealth <= 0) Die();
+        // if (currentHealth <= 0) Die(); - got rid of this for now because this doesn't work with how the enemies are setup ~ Anthony
     }
 
     private void HandleGemCollection(GameObject gem)
@@ -108,6 +127,25 @@ public class DefaultCharacter : MonoBehaviour
         Debug.Log("Player defeated!");
         // Add death animation/effects here
     }
+
+    /**
+     * Method to take damage from enemies or other sources.
+     * @param damage Amount of damage to be taken.
+     * @author Anthony
+     */
+    public void TakeDamage(int damage)
+    {
+        healthScript.takeDamage(damage);
+        if (healthScript.getHP() <= 0)
+        {
+            
+            //HAS TO BE SET IN THE INSPECTOR
+            GameoverCanvas.SetActive(true);
+
+            Destroy(gameObject);
+        }
+    }
+
 
     public void SetMovementEnabled(bool state) => canMove = state;
 }

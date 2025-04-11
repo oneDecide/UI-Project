@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 828656119217907019}
   - component: {fileID: 8808450758712205796}
   - component: {fileID: 5356514291303729378}
-  - component: {fileID: 4377338616435722470}
+  - component: {fileID: 756915466245326251}
   m_Layer: 7
   m_Name: LavaSlimeBaby
   m_TagString: Enemy
@@ -34,7 +34,7 @@ Transform:
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7571917442558315263}
+  - {fileID: 8137296341473349953}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &733334665259947847
@@ -174,20 +174,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2179373659556683378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e42bd0ddaa644dd45a9a1e2abc537f31, type: 3}
+  m_Script: {fileID: 11500000, guid: 5011a754df3b3424fbee86d9af3b535e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  bounceForce: 5
+  bounceForce: 10
   bounceRate: 1
   bounce: 0
   gem: {fileID: 8297253964449474146, guid: 46873a694bcec8644ad7e26c67320aab, type: 3}
   hasAttacked: 0
   slimeDamage: 10
-  hitboxSize: {x: 1, y: 0.97}
+  hitboxSize: {x: 1, y: 1}
   hitboxDistanceHorizontal: 0
   hitboxDistanceVertical: 0
---- !u!114 &4377338616435722470
+--- !u!114 &756915466245326251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,14 +196,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2179373659556683378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c437b1841932d8a4d90ceffbcda21922, type: 3}
+  m_Script: {fileID: 11500000, guid: f57e6b85c07d64e42bcf4dff956a16e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 90
-  currentHealth: 90
-  gemPrefab: {fileID: 0}
-  gemDropChance: 1
---- !u!1001 &899831479394440619
+  maxHealth: 100
+  currentHealth: 100
+--- !u!1001 &1550776306429988373
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -211,25 +209,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1555925393649573874}
     m_Modifications:
-    - target: {fileID: 1654401414284904279, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1654401414284904279, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1654401414284904279, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2965480306529010439, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
       propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2965480306529010439, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
       propertyPath: m_Color.r
-      value: 0.912122
+      value: 0.956295
       objectReference: {fileID: 0}
     - target: {fileID: 4225491547907055312, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
       propertyPath: m_Name
@@ -239,21 +225,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2179373659556683378}
-    - target: {fileID: 7307104952650882900, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 7307104952650882900, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.07
-      objectReference: {fileID: 0}
+    - target: {fileID: 6944630011548618801, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
+      propertyPath: healthTop
+      value: 
+      objectReference: {fileID: 3397544777119453381}
+    - target: {fileID: 6944630011548618801, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
+      propertyPath: healthBottom
+      value: 
+      objectReference: {fileID: 2596933218300936580}
     - target: {fileID: 7307104952650882900, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7307104952650882900, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 7307104952650882900, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -287,14 +273,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6944630011548618801, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
---- !u!4 &7571917442558315263 stripped
+--- !u!1 &2596933218300936580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3571178398647013265, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
+  m_PrefabInstance: {fileID: 1550776306429988373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3397544777119453381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4225491547907055312, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
+  m_PrefabInstance: {fileID: 1550776306429988373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8137296341473349953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7307104952650882900, guid: cec8e5b241a371e41ad40e11ba488dd6, type: 3}
-  m_PrefabInstance: {fileID: 899831479394440619}
+  m_PrefabInstance: {fileID: 1550776306429988373}
   m_PrefabAsset: {fileID: 0}
