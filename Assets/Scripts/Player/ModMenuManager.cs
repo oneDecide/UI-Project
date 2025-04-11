@@ -30,7 +30,7 @@ public class ModMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleModMenu();
             Debug.Log("attempting mod menu");

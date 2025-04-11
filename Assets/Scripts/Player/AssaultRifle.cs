@@ -54,6 +54,8 @@ public class AssaultRifle : MonoBehaviour
     private bool isOnLeftSide;
     private Quaternion targetRotation;
     private Quaternion recoilRotationOffset = Quaternion.identity;
+    public Canvas GameOverCanvas;
+    public Canvas PauseCanvas;
 
     private void Awake()
     {
@@ -102,7 +104,7 @@ public class AssaultRifle : MonoBehaviour
     private void Update()
     {
         if (weaponPivot == null) return;
-        if (ModMenuManager.Instance != null && ModMenuManager.Instance.IsMenuOpen)
+        if ((ModMenuManager.Instance != null && ModMenuManager.Instance.IsMenuOpen))
             return; //Skip all input processing
 
         CalculateTargetPosition();
