@@ -102,6 +102,8 @@ public class AssaultRifle : MonoBehaviour
     private void Update()
     {
         if (weaponPivot == null) return;
+        if (ModMenuManager.Instance != null && ModMenuManager.Instance.IsMenuOpen)
+            return; //Skip all input processing
 
         CalculateTargetPosition();
         HandleAiming();

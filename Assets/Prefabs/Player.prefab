@@ -268,7 +268,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   fireSound: {fileID: 8300000, guid: fcf654a7231afb14eb080ac40c89af86, type: 3}
   reloadSound: {fileID: 0}
-  volume: 0.2
+  volume: 0.12
   weaponSpriteRenderer: {fileID: 6030645848352759520}
   weaponPivot: {fileID: 3712872615594074469}
   orbitRadius: 0.8
@@ -277,10 +277,11 @@ MonoBehaviour:
   forceLeftSide: 0
   instantAim: 0
   positionalRecoilDistance: 0.15
-  rotationalRecoilAngle: 1
+  rotationalRecoilAngle: 0.1
   recoilRecoverySpeed: 7
   recoilRandomRange: {x: -30, y: 30}
   ammoText: {fileID: 0}
+  ammoWarnText: {fileID: 0}
 --- !u!82 &1481349033787235242
 AudioSource:
   m_ObjectHideFlags: 0

@@ -48,6 +48,9 @@ public class DefaultCharacter : MonoBehaviour
 
     private void Update()
     {
+        if (ModMenuManager.Instance != null && ModMenuManager.Instance.IsMenuOpen)
+            return; //Skip all input processing
+        
         if (canMove) HandleInput();
     }
 
