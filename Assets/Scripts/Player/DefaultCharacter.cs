@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefaultCharacter : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] public float moveSpeed = 5f;
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float deceleration = 15f;
 
