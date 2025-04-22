@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Gem
   - GemCounter
+  - EnemySpawnLocation
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - GemCollector
   - PlayerHitbox
-  - 
+  - BORDERS
   - 
   - 
   - 
