@@ -319,7 +319,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -671,6 +671,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 280240211945188882}
     m_Modifications:
+    - target: {fileID: 2766609402476527174, guid: 7cf36947fa98c5047ad7ba3bf78d191a, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 2039
+      objectReference: {fileID: 0}
     - target: {fileID: 6818265780015032043, guid: 7cf36947fa98c5047ad7ba3bf78d191a, type: 3}
       propertyPath: m_Name
       value: PlayerHitbox-ForEnemyAttacks
