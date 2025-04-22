@@ -182,6 +182,7 @@ MonoBehaviour:
   bounceRate: 1
   bounce: 0
   gem: {fileID: 8297253964449474146, guid: 46873a694bcec8644ad7e26c67320aab, type: 3}
+  heart: {fileID: 6139974159981631820, guid: a7a1770008d00334b81baf6441db0189, type: 3}
   hasAttacked: 0
   slimeDamage: 10
   hitboxSize: {x: 1, y: 1}

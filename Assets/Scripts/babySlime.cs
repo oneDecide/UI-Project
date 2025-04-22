@@ -20,6 +20,8 @@ public class babySlime : MonoBehaviour
 
     [SerializeField] public GameObject gem = null;
 
+    [SerializeField] public GameObject heart = null;
+
     public bool hasAttacked = false;
 
     [SerializeField] public int slimeDamage = 10;
@@ -112,6 +114,13 @@ public class babySlime : MonoBehaviour
             if (gem != null){
                 Instantiate(gem, transform.position, Quaternion.identity);
             }
+            // spawn heart 1/3 chance
+            float random = Random.Range(0f, 1f);
+            if (random <= .33f && heart != null){
+                Instantiate(heart, transform.position, Quaternion.identity);
+            }
+
+
             Destroy(gameObject);
         }
     }
